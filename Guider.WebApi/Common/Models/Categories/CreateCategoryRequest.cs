@@ -1,6 +1,24 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using Guider.Domain.Categories;
+
 namespace Guider.Common.Models.Categories;
 
-public sealed record CreateCategoryRequest(
-    string Name,
-    string Description);
+/// <summary>
+/// 
+/// </summary>
+public sealed class CreateCategoryRequest
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    [Required]
+    [MaxLength(CategoryConstants.NameMaxLength)]
+    public required string Name { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [MaxLength(CategoryConstants.DescriptionMaxLenght)]
+    public string Description { get; set; } = string.Empty;
+}

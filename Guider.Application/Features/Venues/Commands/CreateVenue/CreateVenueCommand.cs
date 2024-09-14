@@ -13,14 +13,11 @@ using MediatR;
 namespace Guider.Application.Features.Venues.Commands.CreateVenue;
 
 public sealed record CreateVenueCommand(
-    string Name, 
-    string Description, 
-    Guid CategoryId, 
+    string Name,
+    string Description,
+    Guid CategoryId,
     string Address,
-    List<Guid>? TagIds = null) : IRequest<VenueResult>
-{
-    public List<Guid> TagIds { get; init; } = TagIds ?? new List<Guid>();
-}  
+    List<Guid> TagIds) : IRequest<VenueResult>;
 
 internal sealed class CreateVenueCommandHandler(
     IVenueRepository venueRepository,

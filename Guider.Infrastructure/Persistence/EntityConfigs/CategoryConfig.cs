@@ -25,13 +25,13 @@ internal sealed class CategoryConfig : IEntityTypeConfiguration<Category>
             .Property(e => e.Name)
             .HasColumnName("name")
             .IsRequired()
-            .HasMaxLength(CategoryConstants.NameLength);
+            .HasMaxLength(CategoryConstants.NameMaxLength);
 
         builder
             .Property(e => e.Description)
             .HasColumnName("description")
             .IsRequired(required: false)
-            .HasMaxLength(CategoryConstants.DescriptionLenght);
+            .HasMaxLength(CategoryConstants.DescriptionMaxLenght);
 
         builder
             .HasMany(e => e.Venues)

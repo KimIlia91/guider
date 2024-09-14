@@ -1,5 +1,7 @@
 ﻿using Guider.Common.Cors;
+using Guider.Common.Errors;
 using Guider.Common.Swagger;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Guider.Common;
 
@@ -9,6 +11,7 @@ internal static class DependencyInjection
     {
         service.AddEndpointsApiExplorer();
         service.AddControllers();
+        service.AddSingleton<ProblemDetailsFactory, GuiderApiProblemDetailsFactory>();
         service.AddCorsPolicy(configuration);
         service.AddHttpContextAccessor();
         service.AddRouting(opt => opt.LowercaseUrls = true);
@@ -24,6 +27,7 @@ internal static class DependencyInjection
             app.UseSwaggerUI();
         }
 
+        app.UseCors("CorsPolicy");
         app.UseHttpsRedirection();
         app.UseExceptionHandler("/error");
         app.MapControllers();

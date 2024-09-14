@@ -2,6 +2,6 @@
 
 public static class CategoryConstants
 {
-    public const int NameLength = 255;
-    public const int DescriptionLenght = 4000;
+    public const int NameMaxLength = 255;
+    public const int DescriptionMaxLenght = 4000;
 }

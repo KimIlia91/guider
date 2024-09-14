@@ -1,5 +1,23 @@
-﻿namespace Guider.Common.Models.Tags;
+﻿using System.ComponentModel.DataAnnotations;
+using Guider.Domain.Tags;
 
-public sealed record CreateTagRequest(
-    string Name,
-    string Description = "");
+namespace Guider.Common.Models.Tags;
+
+/// <summary>
+/// 
+/// </summary>
+public sealed class CreateTagRequest
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    [Required]
+    [MaxLength(TagConstants.NameLength)]
+    public required string Name { get; set; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    [MaxLength(TagConstants.DescriptionLenght)]
+    public string Description { get; set; } = string.Empty;
+}

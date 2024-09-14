@@ -13,8 +13,6 @@ namespace Guider.Controllers;
 /// <summary>
 /// Tag controller
 /// </summary>
-[Produces("application/json")]
-[Consumes("application/json")]
 public class TagController(ISender mediatr) : ApiController(mediatr)
 {
    /// <summary>

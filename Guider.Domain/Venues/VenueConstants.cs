@@ -2,7 +2,7 @@
 
 public static class VenueConstants
 {
-    public const int NameLength = 255;
-    public const int DescriptionLenght = 4000;
-    public const int AddressLenght = 4000;
+    public const int NameMaxLength = 255;
+    public const int DescriptionMaxLenght = 4000;
+    public const int AddressMaxLenght = 4000;
 }

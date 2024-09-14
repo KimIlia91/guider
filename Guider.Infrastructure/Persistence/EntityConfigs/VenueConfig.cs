@@ -26,19 +26,19 @@ internal sealed class VenueConfig : IEntityTypeConfiguration<Venue>
             .Property(e => e.Name)
             .HasColumnName("name")
             .IsRequired()
-            .HasMaxLength(VenueConstants.NameLength);
+            .HasMaxLength(VenueConstants.NameMaxLength);
 
         builder
             .Property(e => e.Description)
             .HasColumnName("description")
             .IsRequired(false)
-            .HasMaxLength(VenueConstants.DescriptionLenght);
+            .HasMaxLength(VenueConstants.DescriptionMaxLenght);
 
         builder
             .Property(e => e.Address)
             .HasColumnName("address")
             .IsRequired()
-            .HasMaxLength(VenueConstants.AddressLenght);
+            .HasMaxLength(VenueConstants.AddressMaxLenght);
 
         builder
             .Property(e => e.IsDeleted)

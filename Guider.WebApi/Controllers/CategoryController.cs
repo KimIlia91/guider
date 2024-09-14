@@ -13,8 +13,6 @@ namespace Guider.Controllers;
 /// <summary>
 /// Category controller
 /// </summary>
-[Produces("application/json")]
-[Consumes("application/json")]
 public class CategoryController(ISender mediatr) : ApiController(mediatr)
 {
     /// <summary>

@@ -1,11 +1,41 @@
-﻿namespace Guider.Common.Models.Venues;
+﻿using System.ComponentModel.DataAnnotations;
+using Guider.Domain.Venues;
 
-public sealed record CreateVenueRequest(
-    string Name,
-    string Address,
-    Guid CategoryId,
-    string Description = "",
-    List<Guid>? TagIds = null)
+namespace Guider.Common.Models.Venues;
+
+/// <summary>
+/// 
+/// </summary>
+public class CreateVenueRequest
 {
-    public List<Guid> TagIds { get; init; } = TagIds ?? new List<Guid>();
+    /// <summary>
+    /// 
+    /// </summary>
+    [Required]
+    [MaxLength(VenueConstants.NameMaxLength)]
+    public required string Name { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Required]
+    [MaxLength(VenueConstants.AddressMaxLenght)]
+    public required string Address { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Required]
+    public required Guid CategoryId { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [MaxLength(VenueConstants.DescriptionMaxLenght)]
+    public string Description { get; set; } = "";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public List<Guid>? TagIds { get; set; } = null;
 }

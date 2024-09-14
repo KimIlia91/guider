@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using Guider.Common.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -30,7 +31,7 @@ public class ApiController(ISender mediatr) : ControllerBase
         if (errors.All(error => error.Type == ErrorType.Validation))
             return ValidationProblem(errors);
 
-        HttpContext.Items["errors"] = errors;
+        HttpContext.Items[HttpContextItemKeys.Errors] = errors;
         return Problem(errors[0]);
     }
 
@@ -46,7 +47,7 @@ public class ApiController(ISender mediatr) : ControllerBase
             _ => StatusCodes.Status500InternalServerError,
         };
 
-        return Problem(statusCode: statusCode, title: error.Description);
+        return Problem(statusCode: statusCode, detail: error.Description);
     }
 
     private IActionResult ValidationProblem(List<Error> errors)

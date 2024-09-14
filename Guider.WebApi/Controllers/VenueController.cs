@@ -13,8 +13,6 @@ namespace Guider.Controllers;
 /// <summary>
 /// Venue controller
 /// </summary>
-[Consumes("application/json")]
-[Produces("application/json")]
 public class VenueController(ISender mediatr) : ApiController(mediatr)
 {
     /// <summary>
@@ -28,7 +26,7 @@ public class VenueController(ISender mediatr) : ApiController(mediatr)
     public async Task<IActionResult> CreateVenue(CreateVenueRequest request, CancellationToken cancellationToken)
     {
         var command = new CreateVenueCommand(
-            request.Name, request.Description, request.CategoryId, request.Address, request.TagIds);
+            request.Name, request.Description, request.CategoryId, request.Address, request.TagIds ?? []);
         var result = await Mediatr.Send(command, cancellationToken);
         return Ok(result);
     }
