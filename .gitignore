@@ -16,5 +16,8 @@ obj/
 .idea/
 .vscode/
 
+_ReSharper*/
+*.DotSettings.user
+
 .nuget/
 packages/
