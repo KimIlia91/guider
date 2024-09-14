@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Guider.Controllers;
 
@@ -10,7 +9,7 @@ namespace Guider.Controllers;
 /// Controller for handling error responses.
 /// </summary>
 /// <param name="mediatr">MediatR service for handling requests.</param>
-[Consumes("application/problem+json")]
+[Consumes("application/json", "application/problem+json")]
 public class ErrorController(ISender mediatr) : ApiController(mediatr)
 {
     /// <summary>

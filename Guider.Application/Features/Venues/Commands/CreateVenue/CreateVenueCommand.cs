@@ -1,6 +1,5 @@
 ﻿using Guider.Application.Common.Models;
 using Guider.Application.Common.Repositories;
-using Guider.Application.Features.Tags.Commands.CreateTag;
 using Guider.Application.Features.Venues.Models;
 using Guider.Domain.Categories;
 using Guider.Domain.Categories.ValueObjects;
