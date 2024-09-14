@@ -9,6 +9,7 @@ namespace Guider.Controllers;
 /// Controller for handling error responses.
 /// </summary>
 /// <param name="mediatr">MediatR service for handling requests.</param>
+[ApiExplorerSettings(IgnoreApi = true)]
 public class ErrorController(ISender mediatr) : ApiController(mediatr)
 {
     /// <summary>

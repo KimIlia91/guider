@@ -2,6 +2,7 @@
 using Guider.Application.Features.Categories.Commands.Create;
 using Guider.Application.Features.Categories.Models;
 using Guider.Domain.Categories;
+using Guider.Domain.Categories.Specifications;
 using MediatR;
 
 namespace Guider.Application.Features.Categories.Queries.GetCategories;
@@ -13,7 +14,9 @@ internal sealed class GetCategoriesQueryHandler(
 {
     public async Task<List<CategoryResult>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var categories = await categoryRepository.GetAllAsync(cancellationToken: cancellationToken);
+        var categories = await categoryRepository
+            .GetAllAsync(new GetCategoriesNoTrackingSpecification(), cancellationToken: cancellationToken);
+        
         return categories.ConvertAll(category =>
             new CategoryResult(category.Id.Value, category.Name, category.Description));
     }

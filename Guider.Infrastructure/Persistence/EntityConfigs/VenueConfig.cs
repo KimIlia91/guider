@@ -46,6 +46,10 @@ internal sealed class VenueConfig : IEntityTypeConfiguration<Venue>
             .IsRequired()
             .HasDefaultValue(false);
 
+        builder.HasQueryFilter(e => !e.IsDeleted);
+        
+        builder.HasIndex(e => e.IsDeleted).HasFilter("is_deleted = 0");
+        
         builder
             .Property(e => e.CreatedAt)
             .HasColumnName("created_at")
@@ -66,5 +70,6 @@ internal sealed class VenueConfig : IEntityTypeConfiguration<Venue>
             .WithMany(e => e.Venues)
             .HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.NoAction);
+        
     }
 }

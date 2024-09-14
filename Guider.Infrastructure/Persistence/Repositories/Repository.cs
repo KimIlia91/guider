@@ -1,5 +1,6 @@
 ﻿using Guider.Domain.Common.Models;
 using Guider.Domain.Common.Specifications;
+using Guider.Infrastructure.Persistence.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
@@ -9,19 +10,30 @@ internal abstract class Repository<TEntity, TEntityId>(
     where TEntity : Entity<TEntityId>
     where TEntityId : class
 {
+    private readonly ApplicationDbContext _context = dbContext;
     protected readonly DbSet<TEntity> DbSet = dbContext.Set<TEntity>();
     
-    public Task<List<TEntity>> GetAllAsync(
+    public async Task<List<TEntity>> GetAllAsync(
         Specification<TEntity, TEntityId>? specification = null, 
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await SpecificationExecutor
+            .GetQuery(DbSet, specification)
+            .ToListAsync(cancellationToken);
     }
     
+    public async Task<TEntity?> GetAsync(
+        Specification<TEntity, TEntityId> specification, 
+        CancellationToken cancellationToken)
+    {
+        return await SpecificationExecutor
+            .GetQuery(DbSet, specification)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
     public async Task<TEntity?> GetByIdAsync(TEntityId id, CancellationToken cancellationToken)
     {
-        return await DbSet
-            .FirstOrDefaultAsync(e => e.Id == id, cancellationToken: cancellationToken);
+        return await DbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
     
     public async Task<bool> ExistByIdAsync(TEntityId id, CancellationToken cancellationToken)

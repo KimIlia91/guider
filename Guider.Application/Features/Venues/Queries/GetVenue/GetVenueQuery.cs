@@ -17,7 +17,7 @@ internal sealed class GetVenueQueryHandler(
     public async Task<VenueResult> Handle(GetVenueQuery request, CancellationToken cancellationToken)
     {
         var venue = await venueRepository
-            .GetAsync(new GetByIdWithTagsSpecification(VenueId.Convert(request.Id)), cancellationToken);
+            .GetAsync(new GetVenueByIdWithTagsNoTrackingSpecification(VenueId.Convert(request.Id)), cancellationToken);
 
         if (venue is null)
             throw new ArgumentException(nameof(request.Id));

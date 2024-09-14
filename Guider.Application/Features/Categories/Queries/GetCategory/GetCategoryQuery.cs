@@ -2,6 +2,7 @@
 using Guider.Application.Features.Categories.Commands.Create;
 using Guider.Application.Features.Categories.Models;
 using Guider.Domain.Categories;
+using Guider.Domain.Categories.Specifications;
 using Guider.Domain.Categories.ValueObjects;
 using MediatR;
 
@@ -14,7 +15,8 @@ internal sealed class GetCategoryQueryHandler(
 {
     public async Task<CategoryResult> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
-        var category = await categoryRepository.GetByIdAsync(CategoryId.Convert(request.Id), cancellationToken);
+        var category = await categoryRepository
+            .GetAsync(new GetCategoryByIdNoTrackingSpec(CategoryId.Convert(request.Id)), cancellationToken);
 
         if (category is null)
             throw new ArgumentNullException(nameof(request.Id));

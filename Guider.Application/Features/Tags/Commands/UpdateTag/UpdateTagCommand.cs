@@ -3,6 +3,7 @@ using Guider.Application.Common.Models;
 using Guider.Application.Features.Tags.Commands.CreateTag;
 using Guider.Domain.Categories;
 using Guider.Domain.Tags;
+using Guider.Domain.Tags.Specifications;
 using Guider.Domain.Tags.ValueObjects;
 using MediatR;
 
@@ -19,7 +20,8 @@ internal sealed class UpdateTagCommandHandler(
 {
     public async Task<TagResult> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
     {
-        var tagToUpdate = await tagRepository.GetByIdAsync(TagId.Convert(request.Id), cancellationToken);
+        var tagToUpdate = await tagRepository
+            .GetByIdAsync(TagId.Convert(request.Id), cancellationToken);
 
         if (tagToUpdate is null)
         {

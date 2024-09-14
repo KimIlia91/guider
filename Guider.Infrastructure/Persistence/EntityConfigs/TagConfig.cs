@@ -39,6 +39,10 @@ internal sealed class TagConfig : IEntityTypeConfiguration<Tag>
             .HasColumnName("is_deleted")
             .IsRequired()
             .HasDefaultValue(false);
+        
+        builder.HasQueryFilter(e => !e.IsDeleted);
+        
+        builder.HasIndex(e => e.IsDeleted).HasFilter("is_deleted = 0");
 
         builder
             .Property(e => e.CreatedAt)
@@ -54,5 +58,6 @@ internal sealed class TagConfig : IEntityTypeConfiguration<Tag>
             .HasMany(e => e.Venues)
             .WithMany(e => e.Tags)
             .UsingEntity(e => e.ToTable("venues_tags"));
+        
     }
 }

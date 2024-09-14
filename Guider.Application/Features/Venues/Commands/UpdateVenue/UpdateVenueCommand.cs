@@ -61,8 +61,8 @@ internal sealed class UpdateVenueCommandHandler(
         }
         
         venue.Update(request.Name, request.Description, request.Address);
-        venueRepository.Update(venue);
         await unitOfWork.SaveAsync(cancellationToken);
+        
         return new VenueResult(
             venue.Id.Value,
             venue.Name,

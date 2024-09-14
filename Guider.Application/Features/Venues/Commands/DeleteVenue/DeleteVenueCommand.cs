@@ -15,7 +15,7 @@ internal sealed class DeleteVenueCommandHandler(
     public async Task Handle(DeleteVenueCommand request, CancellationToken cancellationToken)
     {
         var venue = await venueRepository
-            .GetAsync(new GetVenueByIdSpecification(VenueId.Convert(request.Id)), cancellationToken);
+            .GetByIdAsync(VenueId.Convert(request.Id), cancellationToken);
 
         if (venue is null)
             throw new ArgumentException(nameof(request.Id));

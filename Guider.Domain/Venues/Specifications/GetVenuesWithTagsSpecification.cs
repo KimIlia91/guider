@@ -8,5 +8,7 @@ public sealed class GetVenuesWithTagsSpecification : Specification<Venue, VenueI
     public GetVenuesWithTagsSpecification() : base(null)
     {
         AddInclude(venue => venue.Tags);
+
+        IsAsNoTracking = true;
     }
 }

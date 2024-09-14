@@ -11,6 +11,8 @@ public interface IVenueRepository
         Specification<Venue, VenueId>? specification = null, 
         CancellationToken cancellationToken = default);
 
+    Task<Venue?> GetByIdAsync(VenueId id, CancellationToken cancellationToken);
+
     void Update(Venue venue);
 
     Task CreateAsync(Venue venue, CancellationToken cancellationToken);

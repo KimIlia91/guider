@@ -44,7 +44,11 @@ internal sealed class CategoryConfig : IEntityTypeConfiguration<Category>
             .HasColumnName("is_deleted")
             .IsRequired()
             .HasDefaultValue(false);
-
+        
+        builder.HasQueryFilter(e => !e.IsDeleted);
+        
+        builder.HasIndex(e => e.IsDeleted).HasFilter("is_deleted = 0");
+        
         builder
             .Property(e => e.CreatedAt)
             .HasColumnName("created_at")

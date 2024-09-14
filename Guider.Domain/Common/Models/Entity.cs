@@ -1,6 +1,8 @@
-﻿namespace Guider.Domain.Common.Models;
+﻿using Guider.Domain.Common.Primitives;
 
-public abstract class Entity<TId>(TId id) : IEquatable<Entity<TId>>
+namespace Guider.Domain.Common.Models;
+
+public abstract class Entity<TId>(TId id) : ISoftDeleted, IEquatable<Entity<TId>>
     where TId : notnull
 {
     public TId Id { get; protected set; } = id;

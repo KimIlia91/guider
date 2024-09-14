@@ -5,6 +5,10 @@ namespace Guider.Domain.Categories;
 
 public interface ICategoryRepository
 {
+    Task<Category?> GetAsync(
+        Specification<Category, CategoryId> specification, 
+        CancellationToken cancellationToken);
+    
     Task<Category?> GetByIdAsync(CategoryId id, CancellationToken cancellationToken);
 
     Task<List<Category>> GetAllAsync(

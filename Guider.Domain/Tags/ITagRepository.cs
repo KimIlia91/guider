@@ -5,7 +5,9 @@ namespace Guider.Domain.Tags;
 
 public interface ITagRepository
 {
-   Task<Tag?> GetByIdAsync(TagId id, CancellationToken cancellationToken);
+    Task<Tag?> GetByIdAsync(TagId id, CancellationToken cancellationToken);
+    
+   Task<Tag?> GetAsync(Specification<Tag, TagId> specification, CancellationToken cancellationToken);
 
    Task<bool> ExistByNameAsync(string tagName, CancellationToken cancellationToken);
    
