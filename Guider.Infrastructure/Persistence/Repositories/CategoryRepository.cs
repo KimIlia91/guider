@@ -1,40 +1,15 @@
 ﻿using Guider.Domain.Categories;
 using Guider.Domain.Categories.ValueObjects;
-using Guider.Domain.Common.Specifications;
+using Microsoft.EntityFrameworkCore;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
 
-internal sealed class CategoryRepository : ICategoryRepository
+internal sealed class CategoryRepository(ApplicationDbContext dbContext) 
+    : Repository<Category, CategoryId>(dbContext), ICategoryRepository
 {
-    public Task<Category?> GetByIdAsync(CategoryId id, CancellationToken cancellationToken)
+    public async Task<bool> ExistByNameAsync(string name, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Category>> GetAllAsync(
-        Specification<Category, CategoryId>? specification = null, 
-        CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Category category, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task CreateAsync(Category category, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> ExistByNameAsync(string name, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> ExistByIdAsync(CategoryId id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        return await DbSet
+            .AnyAsync(e => e.Name.ToLower().Equals(name.ToLower()), cancellationToken);
     }
 }

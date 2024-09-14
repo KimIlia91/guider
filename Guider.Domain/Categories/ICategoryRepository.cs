@@ -11,7 +11,7 @@ public interface ICategoryRepository
         Specification<Category, CategoryId>? specification = null,
         CancellationToken cancellationToken = default);
 
-    Task UpdateAsync(Category category, CancellationToken cancellationToken);
+    void Update(Category category);
 
     Task CreateAsync(Category category, CancellationToken cancellationToken);
 

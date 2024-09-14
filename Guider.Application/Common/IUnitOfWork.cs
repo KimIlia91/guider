@@ -1,4 +1,4 @@
-﻿namespace Guider.Application.Common.Repositories;
+﻿namespace Guider.Application.Common;
 
 public interface IUnitOfWork
 {

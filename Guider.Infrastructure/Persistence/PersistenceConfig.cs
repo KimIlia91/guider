@@ -1,4 +1,4 @@
-﻿using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
 using Guider.Domain.Categories;
 using Guider.Domain.Tags;
 using Guider.Domain.Venues;

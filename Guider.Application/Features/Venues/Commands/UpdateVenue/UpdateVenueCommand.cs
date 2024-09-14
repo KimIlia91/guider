@@ -1,5 +1,5 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
+using Guider.Application.Common.Models;
 using Guider.Application.Features.Tags.Commands.CreateTag;
 using Guider.Application.Features.Venues.Commands.CreateVenue;
 using Guider.Application.Features.Venues.Models;
@@ -61,7 +61,7 @@ internal sealed class UpdateVenueCommandHandler(
         }
         
         venue.Update(request.Name, request.Description, request.Address);
-        await venueRepository.UpdateAsync(venue, cancellationToken);
+        venueRepository.Update(venue);
         await unitOfWork.SaveAsync(cancellationToken);
         return new VenueResult(
             venue.Id.Value,

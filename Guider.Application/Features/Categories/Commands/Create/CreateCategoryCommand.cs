@@ -1,5 +1,4 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
 using Guider.Application.Features.Categories.Models;
 using Guider.Domain.Categories;
 using MediatR;

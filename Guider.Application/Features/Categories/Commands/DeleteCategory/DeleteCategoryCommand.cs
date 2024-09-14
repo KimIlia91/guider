@@ -1,4 +1,4 @@
-﻿using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
 using Guider.Domain.Categories;
 using Guider.Domain.Categories.ValueObjects;
 using MediatR;
@@ -19,7 +19,7 @@ internal sealed class DeleteCategoryCommandHandler(
             throw new ArgumentException(nameof(request.Id));
         
         category.Delete();
-        await categoryRepository.UpdateAsync(category, cancellationToken);
+        categoryRepository.Update(category);
         await unitOfWork.SaveAsync(cancellationToken);
     }
 }

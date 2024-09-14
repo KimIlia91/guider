@@ -1,33 +1,21 @@
 ﻿using Guider.Domain.Common.Specifications;
 using Guider.Domain.Entities.Venues.ValueObjects;
 using Guider.Domain.Venues;
+using Microsoft.EntityFrameworkCore;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
 
-public class VenueRepository : IVenueRepository
+internal class VenueRepository(ApplicationDbContext dbContext) 
+    : Repository<Venue, VenueId>(dbContext), IVenueRepository
 {
     public Task<Venue?> GetAsync(Specification<Venue, VenueId> specification, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Venue>> GetAllAsync(Specification<Venue, VenueId>? specification = null, CancellationToken cancellationToken = default)
+    public async Task<bool> ExistByNameAsync(string name, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Venue venue, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task CreateAsync(Venue venue, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> ExistByNameAsync(string name, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        return await DbSet
+            .AnyAsync(v => v.Name.ToLower().Equals(name.ToLower()), cancellationToken);
     }
 }

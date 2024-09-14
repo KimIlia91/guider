@@ -1,33 +1,15 @@
-﻿using Guider.Domain.Common.Specifications;
-using Guider.Domain.Tags;
+﻿using Guider.Domain.Tags;
 using Guider.Domain.Tags.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
 
-internal sealed class TagRepository : ITagRepository
+internal sealed class TagRepository(ApplicationDbContext dbContext) 
+    : Repository<Tag, TagId>(dbContext), ITagRepository
 {
-    public Task<Tag?> GetByIdAsync(TagId id, CancellationToken cancellationToken)
+    public async Task<bool> ExistByNameAsync(string tagName, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> ExistTagByNameAsync(string tagName, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task CreateAsync(Tag tag, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Tag tag, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Tag>> GetAllAsync(Specification<Tag, TagId>? specification = null, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
+        return await DbSet
+            .AnyAsync(t => t.Name.ToLower().Equals(tagName.ToLower()), cancellationToken);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
 

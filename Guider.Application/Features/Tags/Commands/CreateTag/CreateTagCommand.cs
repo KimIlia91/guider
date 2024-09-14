@@ -1,5 +1,5 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
+using Guider.Application.Common.Models;
 using Guider.Domain.Categories;
 using Guider.Domain.Tags;
 using MediatR;
@@ -14,7 +14,7 @@ public sealed class CreateTagCommandHandler(
 {
     public async Task<TagResult> Handle(CreateTagCommand request, CancellationToken cancellationToken)
     {
-        if (await tagRepository.ExistTagByNameAsync(request.Name, cancellationToken))
+        if (await tagRepository.ExistByNameAsync(request.Name, cancellationToken))
         {
             throw new ArgumentException(nameof(request.Name));
         }

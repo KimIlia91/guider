@@ -7,11 +7,11 @@ public interface ITagRepository
 {
    Task<Tag?> GetByIdAsync(TagId id, CancellationToken cancellationToken);
 
-   Task<bool> ExistTagByNameAsync(string tagName, CancellationToken cancellationToken);
+   Task<bool> ExistByNameAsync(string tagName, CancellationToken cancellationToken);
    
    Task CreateAsync(Tag tag, CancellationToken cancellationToken);
 
-   Task UpdateAsync(Tag tag, CancellationToken cancellationToken);
+   void Update(Tag tag);
 
    Task<List<Tag>> GetAllAsync(
       Specification<Tag, TagId>? specification = null, 

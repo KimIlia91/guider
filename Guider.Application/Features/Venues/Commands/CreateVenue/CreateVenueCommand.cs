@@ -1,5 +1,5 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
+using Guider.Application.Common.Models;
 using Guider.Application.Features.Venues.Models;
 using Guider.Domain.Categories;
 using Guider.Domain.Categories.ValueObjects;

@@ -1,4 +1,4 @@
-﻿using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
 using Guider.Domain.Tags;
 using Guider.Domain.Tags.ValueObjects;
 using MediatR;
@@ -19,7 +19,7 @@ internal sealed class DeleteTagCommandHandler(
             throw new ArgumentException(nameof(request.Id));
         
         tag.Delete();
-        await tagRepository.UpdateAsync(tag, cancellationToken);
+        tagRepository.Update(tag);
         await unitOfWork.SaveAsync(cancellationToken);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
 using Guider.Domain.Entities.Venues.ValueObjects;
 using Guider.Domain.Venues;
 using Guider.Domain.Venues.Specifications;
@@ -21,7 +21,7 @@ internal sealed class DeleteVenueCommandHandler(
             throw new ArgumentException(nameof(request.Id));
         
         venue.Delete();
-        await venueRepository.UpdateAsync(venue, cancellationToken);
+        venueRepository.Update(venue);
         await unitOfWork.SaveAsync(cancellationToken);
     }
 }

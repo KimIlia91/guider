@@ -1,5 +1,5 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Common.Repositories;
+﻿using Guider.Application.Common;
+using Guider.Application.Common.Models;
 using Guider.Application.Features.Tags.Commands.CreateTag;
 using Guider.Domain.Categories;
 using Guider.Domain.Tags;
@@ -27,7 +27,7 @@ internal sealed class UpdateTagCommandHandler(
         }
         
         tagToUpdate.Update(request.Name, request.Description);
-        await tagRepository.UpdateAsync(tagToUpdate, cancellationToken);
+        tagRepository.Update(tagToUpdate);
         await unitOfWork.SaveAsync(cancellationToken);
         return new TagResult(tagToUpdate.Id.Value, tagToUpdate.Name, tagToUpdate.Description);
     }
