@@ -1,0 +1,12 @@
+E:\MyProjects\Guider\Guider.Domain\bin\Debug\net8.0\Guider.Domain.deps.json
+E:\MyProjects\Guider\Guider.Domain\bin\Debug\net8.0\Guider.Domain.dll
+E:\MyProjects\Guider\Guider.Domain\bin\Debug\net8.0\Guider.Domain.pdb
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.csproj.AssemblyReference.cache
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.AssemblyInfoInputs.cache
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.AssemblyInfo.cs
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.csproj.CoreCompileInputs.cache
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.dll
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\refint\Guider.Domain.dll
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\Guider.Domain.pdb
+E:\MyProjects\Guider\Guider.Domain\obj\Debug\net8.0\ref\Guider.Domain.dll
