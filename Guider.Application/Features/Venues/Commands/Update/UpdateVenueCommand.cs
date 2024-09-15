@@ -72,6 +72,7 @@ internal sealed class UpdateVenueCommandHandler(
         return new VenueResult(
             venue.Id.Value,
             venue.Name,
+            venue.CategoryId.Value,
             venue.Description,
             venue.Address,
             venue.Tags.ToList().ConvertAll(tag => new TagResult(tag.Id.Value, tag.Name, tag.Description)));
