@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Guider.Controllers;
 
 /// <summary>
-/// Venue controller
+/// Controller for handling venue-related operations
 /// </summary>
 public class VenueController(ISender mediatr) : ApiController(mediatr)
 {
@@ -64,7 +64,7 @@ public class VenueController(ISender mediatr) : ApiController(mediatr)
     {
         var query = new GetVenuesQuery();
         var result = await Mediatr.Send(query, cancellationToken);
-        return Ok(result);
+        return result.Match(Ok, Problem);
     }
 
     /// <summary>

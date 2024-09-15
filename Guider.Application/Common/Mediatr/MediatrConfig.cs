@@ -10,10 +10,12 @@ internal static class MediatrConfig
     public static void AddMediatr(this IServiceCollection service)
     {
         var assembly = Assembly.GetExecutingAssembly();
+        
         service.AddMediatR(cnf =>
         {
             cnf.RegisterServicesFromAssembly(assembly);
             cnf.AddBehavior(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+            cnf.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingRequestBehavior<,>));
         });
     }
 }

@@ -19,7 +19,7 @@ internal static class DependencyInjection
         return service;
     }
 
-    public static void UsePresentation(this WebApplication app)
+    public static WebApplication UsePresentation(this WebApplication app)
     {
         if (app.Environment.IsDevelopment())
         {
@@ -31,6 +31,6 @@ internal static class DependencyInjection
         app.UseHttpsRedirection();
         app.UseExceptionHandler("/error");
         app.MapControllers();
-        app.Run();
+        return app;
     }
 }

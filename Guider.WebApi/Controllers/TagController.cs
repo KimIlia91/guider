@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Guider.Controllers;
 
 /// <summary>
-/// Tag controller
+/// Controller to manage tag-related operations
 /// </summary>
 public class TagController(ISender mediatr) : ApiController(mediatr)
 {
@@ -56,7 +56,7 @@ public class TagController(ISender mediatr) : ApiController(mediatr)
    {
       var query = new GetTagsQuery();
       var result = await Mediatr.Send(query, cancellationToken);
-      return Ok(result);
+      return result.Match(Ok, Problem);
    }
 
    /// <summary>

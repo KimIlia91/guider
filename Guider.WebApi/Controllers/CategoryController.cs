@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Guider.Controllers;
 
 /// <summary>
-/// Category controller
+/// Controller for managing categories.
 /// </summary>
 public class CategoryController(ISender mediatr) : ApiController(mediatr)
 {
@@ -56,7 +56,7 @@ public class CategoryController(ISender mediatr) : ApiController(mediatr)
     {
         var query = new GetCategoriesQuery();
         var result = await Mediatr.Send(query, cancellationToken);
-        return Ok(result);
+        return result.Match(Ok, Problem);
     }
 
     /// <summary>
