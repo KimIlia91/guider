@@ -1,5 +1,5 @@
-﻿using Guider.Application.Features.Categories.Commands.Delete;
-using Guider.Application.Features.Venues.Commands.Create;
+﻿using Guider.Application.Features.Venues.Commands.Create;
+using Guider.Application.Features.Venues.Commands.Delete;
 using Guider.Application.Features.Venues.Commands.Update;
 using Guider.Application.Features.Venues.Models;
 using Guider.Application.Features.Venues.Queries.GetAll;
@@ -92,7 +92,7 @@ public class VenueController(ISender mediatr) : ApiController(mediatr)
     [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteVenue(Guid id, CancellationToken cancellationToken)
     {
-        var command = new DeleteCategoryCommand(id);
+        var command = new DeleteVenueCommand(id);
         var result = await Mediatr.Send(command, cancellationToken);
         return result.Match(_ => NoContent(), Problem);
     }
