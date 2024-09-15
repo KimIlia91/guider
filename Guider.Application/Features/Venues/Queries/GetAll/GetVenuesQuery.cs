@@ -1,12 +1,10 @@
 ﻿using Guider.Application.Common.Models;
-using Guider.Application.Features.Tags.Commands.CreateTag;
-using Guider.Application.Features.Venues.Commands.CreateVenue;
 using Guider.Application.Features.Venues.Models;
 using Guider.Domain.Venues;
 using Guider.Domain.Venues.Specifications;
 using MediatR;
 
-namespace Guider.Application.Features.Venues.Queries.GetVenues;
+namespace Guider.Application.Features.Venues.Queries.GetAll;
 
 public sealed record GetVenuesQuery : IRequest<List<VenueResult>>;
 

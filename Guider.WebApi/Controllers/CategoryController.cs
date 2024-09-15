@@ -1,9 +1,9 @@
 ﻿using Guider.Application.Features.Categories.Commands.Create;
-using Guider.Application.Features.Categories.Commands.DeleteCategory;
+using Guider.Application.Features.Categories.Commands.Delete;
 using Guider.Application.Features.Categories.Commands.Update;
 using Guider.Application.Features.Categories.Models;
-using Guider.Application.Features.Categories.Queries.GetCategories;
-using Guider.Application.Features.Categories.Queries.GetCategory;
+using Guider.Application.Features.Categories.Queries.GetAll;
+using Guider.Application.Features.Categories.Queries.GetById;
 using Guider.Common.Models.Categories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ public class CategoryController(ISender mediatr) : ApiController(mediatr)
     {
         var command = new CreateCategoryCommand(request.Name, request.Description);
         var result = await Mediatr.Send(command, cancellationToken);
-        return Ok(result);
+        return result.Match(Ok, Problem);
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public class CategoryController(ISender mediatr) : ApiController(mediatr)
     {
         var command = new UpdateCategoryCommand(request.Id, request.Name, request.Description);
         var result = await Mediatr.Send(command, cancellationToken);
-        return Ok(result);
+        return result.Match(Ok, Problem);
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public class CategoryController(ISender mediatr) : ApiController(mediatr)
     {
         var query = new GetCategoryQuery(id);
         var result = await Mediatr.Send(query, cancellationToken);
-        return Ok(result);
+        return result.Match(Ok, Problem);
     }
 
     /// <summary>
@@ -84,7 +84,7 @@ public class CategoryController(ISender mediatr) : ApiController(mediatr)
     public async Task<IActionResult> DeleteCategory(Guid id, CancellationToken cancellationToken)
     {
         var command = new DeleteCategoryCommand(id);
-        await Mediatr.Send(command, cancellationToken);
-        return NoContent();
+        var result = await Mediatr.Send(command, cancellationToken);
+        return result.Match(_ => NoContent(), Problem);
     }
 }

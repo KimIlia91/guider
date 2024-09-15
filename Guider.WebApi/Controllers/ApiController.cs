@@ -47,7 +47,7 @@ public class ApiController(ISender mediatr) : ControllerBase
             _ => StatusCodes.Status500InternalServerError,
         };
 
-        return Problem(statusCode: statusCode, detail: error.Description);
+        return Problem(statusCode: statusCode);
     }
 
     private IActionResult ValidationProblem(List<Error> errors)

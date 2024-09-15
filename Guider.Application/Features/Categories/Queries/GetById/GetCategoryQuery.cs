@@ -1,25 +1,25 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Features.Categories.Commands.Create;
+﻿using ErrorOr;
 using Guider.Application.Features.Categories.Models;
 using Guider.Domain.Categories;
 using Guider.Domain.Categories.Specifications;
 using Guider.Domain.Categories.ValueObjects;
+using Guider.Domain.Common.Errors;
 using MediatR;
 
-namespace Guider.Application.Features.Categories.Queries.GetCategory;
+namespace Guider.Application.Features.Categories.Queries.GetById;
 
-public sealed record GetCategoryQuery(Guid Id) : IRequest<CategoryResult>;
+public sealed record GetCategoryQuery(Guid Id) : IRequest<ErrorOr<CategoryResult>>;
 
 internal sealed class GetCategoryQueryHandler(
-    ICategoryRepository categoryRepository) : IRequestHandler<GetCategoryQuery, CategoryResult>
+    ICategoryRepository categoryRepository) : IRequestHandler<GetCategoryQuery, ErrorOr<CategoryResult>>
 {
-    public async Task<CategoryResult> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CategoryResult>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var category = await categoryRepository
             .GetAsync(new GetCategoryByIdNoTrackingSpec(CategoryId.Convert(request.Id)), cancellationToken);
 
         if (category is null)
-            throw new ArgumentNullException(nameof(request.Id));
+            return Errors.Category.NotFoundById(request.Id);
 
         return new CategoryResult(category.Id.Value, category.Name, category.Description);
     }

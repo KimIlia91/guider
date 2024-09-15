@@ -4,8 +4,16 @@ using Microsoft.OpenApi.Models;
 
 namespace Guider.Common.Swagger;
 
+/// <summary>
+/// Provides extension methods for configuring Swagger in an ASP.NET Core application.
+/// </summary>
 internal static class SwaggerConfig
 {
+    /// <summary>
+    /// Configures Swagger services for the application.
+    /// </summary>
+    /// <param name="service">The IServiceCollection to add the Swagger services to.</param>
+    /// <param name="configuration">The IConfiguration instance to use for reading configuration settings.</param>
     public static void AddSwagger(this IServiceCollection service, IConfiguration configuration)
     {
         var assembly = Assembly.GetExecutingAssembly();

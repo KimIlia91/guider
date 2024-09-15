@@ -1,11 +1,9 @@
-﻿using Guider.Application.Common.Models;
-using Guider.Application.Features.Categories.Commands.Create;
-using Guider.Application.Features.Categories.Models;
+﻿using Guider.Application.Features.Categories.Models;
 using Guider.Domain.Categories;
 using Guider.Domain.Categories.Specifications;
 using MediatR;
 
-namespace Guider.Application.Features.Categories.Queries.GetCategories;
+namespace Guider.Application.Features.Categories.Queries.GetAll;
 
 public sealed record GetCategoriesQuery : IRequest<List<CategoryResult>>;
 

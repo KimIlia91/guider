@@ -1,9 +1,9 @@
 ﻿using Guider.Application.Common.Models;
-using Guider.Application.Features.Tags.Commands.CreateTag;
-using Guider.Application.Features.Tags.Commands.DeleteTag;
-using Guider.Application.Features.Tags.Commands.UpdateTag;
-using Guider.Application.Features.Tags.Queries.GetTag;
-using Guider.Application.Features.Tags.Queries.GetTags;
+using Guider.Application.Features.Tags.Commands.Create;
+using Guider.Application.Features.Tags.Commands.Delete;
+using Guider.Application.Features.Tags.Commands.Update;
+using Guider.Application.Features.Tags.Queries.GetAll;
+using Guider.Application.Features.Tags.Queries.GetById;
 using Guider.Common.Models.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ public class TagController(ISender mediatr) : ApiController(mediatr)
    {
       var command = new CreateTagCommand(request.Name, request.Description);
       var result = await Mediatr.Send(command, cancellationToken);
-      return Ok(result);
+      return result.Match(Ok, Problem);
    }
 
    /// <summary>
@@ -42,7 +42,7 @@ public class TagController(ISender mediatr) : ApiController(mediatr)
    {
       var command = new UpdateTagCommand(request.Id, request.Name, request.Description);
       var result = await Mediatr.Send(command, cancellationToken);
-      return Ok(result);
+      return result.Match(Ok, Problem);
    }
 
    /// <summary>
@@ -71,7 +71,7 @@ public class TagController(ISender mediatr) : ApiController(mediatr)
    {
       var query = new GetTagQuery(id);
       var result = await Mediatr.Send(query, cancellationToken);
-      return Ok(result);
+      return result.Match(Ok, Problem);
    }
 
    /// <summary>
@@ -85,7 +85,7 @@ public class TagController(ISender mediatr) : ApiController(mediatr)
    public async Task<IActionResult> DeleteTag(Guid id, CancellationToken cancellationToken)
    {
       var command = new DeleteTagCommand(id);
-      await Mediatr.Send(command, cancellationToken);
-      return NoContent();
+      var result = await Mediatr.Send(command, cancellationToken);
+      return result.Match(_ => NoContent(), Problem);
    }
 }

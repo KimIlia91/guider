@@ -3,13 +3,15 @@
 namespace Guider.Common.Cors;
 
 /// <summary>
-/// CORS configuration
+/// Provides extension methods for configuring CORS (Cross-Origin Resource Sharing) policies.
 /// </summary>
 public static class CorsConfig
 {
     /// <summary>
-    /// Add cors config extension method
+    /// Adds and configures a CORS policy to the IServiceCollection.
     /// </summary>
+    /// <param name="service">The IServiceCollection to add the CORS policy to.</param>
+    /// <param name="configuration">The IConfiguration instance containing CORS settings.</param>
     public static void AddCorsPolicy(this IServiceCollection service, IConfiguration configuration)
     {
         var corsOptions = configuration.GetSection("CORS").Get<CorsOptions>() ?? new CorsOptions();

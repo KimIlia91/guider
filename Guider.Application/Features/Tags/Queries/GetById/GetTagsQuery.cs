@@ -1,11 +1,9 @@
 ﻿using Guider.Application.Common.Models;
-using Guider.Application.Features.Tags.Commands.CreateTag;
-using Guider.Domain.Categories;
 using Guider.Domain.Tags;
 using Guider.Domain.Tags.Specifications;
 using MediatR;
 
-namespace Guider.Application.Features.Tags.Queries.GetTags;
+namespace Guider.Application.Features.Tags.Queries.GetById;
 
 public sealed record GetTagsQuery : IRequest<List<TagResult>>;
 
