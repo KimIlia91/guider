@@ -1,0 +1,41 @@
+﻿version: '3.8'
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  guider-api:
+    image: guider-api
+    container_name: guider-api
+    build:
+      context: .
+      dockerfile: Guider.WebApi/Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=guider-db;Port=5432;Database=guider_db;Username=postgres;Password=postgres
+    networks:
+      - dev
+    depends_on:
+      - guider-db
+
+  guider-db:
+    image: postgres:latest
+    container_name: guider-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: guider_db
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+volumes:
+  postgres_data:
+  

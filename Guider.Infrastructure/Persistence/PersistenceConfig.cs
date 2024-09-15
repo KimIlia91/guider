@@ -3,6 +3,7 @@ using Guider.Domain.Categories;
 using Guider.Domain.Tags;
 using Guider.Domain.Venues;
 using Guider.Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,5 +21,10 @@ internal static class PersistenceConfig
         service.AddScoped<ICategoryRepository, CategoryRepository>();
         service.AddScoped<IVenueRepository, VenueRepository>();
         service.AddScoped<IUnitOfWork, UnitOfWork>();
+    }
+
+    public static void UsePersistence(this WebApplication app)
+    {
+        app.UseMigrate();
     }
 }

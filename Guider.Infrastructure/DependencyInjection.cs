@@ -13,14 +13,15 @@ public static class DependencyInjection
         IConfiguration configuration,
         ConfigureHostBuilder hostBuilder)
     {
-        service.AddPersistence(configuration);
         hostBuilder.AddLogging();
+        service.AddPersistence(configuration);
         return service;
     }
 
     public static WebApplication UseInfrastructure(this WebApplication app)
     {
         app.UseLogging();
+        app.UsePersistence();
         return app;
     }
 }

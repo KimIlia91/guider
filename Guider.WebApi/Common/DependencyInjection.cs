@@ -21,15 +21,17 @@ internal static class DependencyInjection
 
     public static WebApplication UsePresentation(this WebApplication app)
     {
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-
+        app.UseSwagger();
+        app.UseSwaggerUI();
         app.UseCors("CorsPolicy");
-        app.UseHttpsRedirection();
         app.UseExceptionHandler("/error");
+
+        app.MapGet("/", context =>
+        {
+            context.Response.Redirect("/swagger");
+            return Task.CompletedTask;
+        });
+        
         app.MapControllers();
         return app;
     }
