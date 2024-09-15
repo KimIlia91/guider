@@ -8,6 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Guider.WebApi/Guider.WebApi.csproj", "Guider.WebApi/"]
+COPY ["Guider.Application/Guider.Application.csproj", "Guider.Application/"]
+COPY ["Guider.Domain/Guider.Domain.csproj", "Guider.Domain/"]
+COPY ["Guider.Infrastructure/Guider.Infrastructure.csproj", "Guider.Infrastructure/"]
 RUN dotnet restore "Guider.WebApi/Guider.WebApi.csproj"
 COPY . .
 WORKDIR "/src/Guider.WebApi"
