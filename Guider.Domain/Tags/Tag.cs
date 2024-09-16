@@ -1,5 +1,4 @@
 ﻿using Guider.Domain.Common.Models;
-using Guider.Domain.Entities.Venues;
 using Guider.Domain.Tags.ValueObjects;
 using Guider.Domain.Venues;
 
