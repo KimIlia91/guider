@@ -1,8 +1,5 @@
-﻿using Guider.Domain.Common.Specifications;
-using Guider.Domain.Entities.Venues.ValueObjects;
+﻿using Guider.Domain.Entities.Venues.ValueObjects;
 using Guider.Domain.Venues;
-using Guider.Infrastructure.Persistence.Specifications;
-using Microsoft.EntityFrameworkCore;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
 

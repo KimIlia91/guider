@@ -1,6 +1,5 @@
 ﻿using Guider.Domain.Categories;
 using Guider.Domain.Categories.ValueObjects;
-using Microsoft.EntityFrameworkCore;
 
 namespace Guider.Infrastructure.Persistence.Repositories;
 
