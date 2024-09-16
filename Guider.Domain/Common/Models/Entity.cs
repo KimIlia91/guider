@@ -2,10 +2,12 @@
 
 namespace Guider.Domain.Common.Models;
 
-public abstract class Entity<TId>(TId id) : ISoftDeleted, IEquatable<Entity<TId>>
+public abstract class Entity<TId>(TId id) : ISoftDeleted, IHaveName, IEquatable<Entity<TId>>
     where TId : notnull
 {
     public TId Id { get; protected set; } = id;
+
+    public string Name { get; protected set; } = string.Empty;
 
     public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
 
@@ -37,4 +39,5 @@ public abstract class Entity<TId>(TId id) : ISoftDeleted, IEquatable<Entity<TId>
     {
         return Id.GetHashCode();
     }
+
 }

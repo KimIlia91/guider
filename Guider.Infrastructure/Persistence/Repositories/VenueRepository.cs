@@ -9,9 +9,4 @@ namespace Guider.Infrastructure.Persistence.Repositories;
 internal class VenueRepository(ApplicationDbContext dbContext) 
     : Repository<Venue, VenueId>(dbContext), IVenueRepository
 {
-    public async Task<bool> ExistByNameAsync(string name, CancellationToken cancellationToken)
-    {
-        return await DbSet
-            .AnyAsync(v => v.Name.ToLower().Equals(name.ToLower()), cancellationToken);
-    }
 }

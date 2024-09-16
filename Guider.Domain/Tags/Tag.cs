@@ -8,8 +8,6 @@ namespace Guider.Domain.Tags;
 public sealed class Tag : Entity<TagId>
 {
     private readonly List<Venue> _venues = [];
-    
-    public string Name { get; private set; }
 
     public string Description { get; private set; } = string.Empty;
 

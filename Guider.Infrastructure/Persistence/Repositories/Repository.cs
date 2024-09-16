@@ -10,8 +10,13 @@ internal abstract class Repository<TEntity, TEntityId>(
     where TEntity : Entity<TEntityId>
     where TEntityId : class
 {
-    private readonly ApplicationDbContext _context = dbContext;
     protected readonly DbSet<TEntity> DbSet = dbContext.Set<TEntity>();
+    
+    public async Task<bool> ExistByNameAsync(string name, CancellationToken cancellationToken)
+    {
+        return await DbSet
+            .AnyAsync(v => v.Name.ToLower().Equals(name.ToLower()), cancellationToken);
+    }
     
     public async Task<List<TEntity>> GetAllAsync(
         Specification<TEntity, TEntityId>? specification = null, 
