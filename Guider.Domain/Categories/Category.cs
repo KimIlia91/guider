@@ -29,7 +29,7 @@ public sealed class Category : Entity<CategoryId>
 
     public void Update(string name, string description)
     {
-        Name = name.Trim();
+        Name = name;
         Description = description;
         UpdatedAt = DateTime.UtcNow;
     }
