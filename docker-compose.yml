@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Guider.WebApi/Dockerfile
     ports:
-      - 8098:8080
+      - "8098:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Host=guider-db;Port=5432;Database=guider_db;Username=postgres;Password=postgres
@@ -34,8 +34,8 @@ services:
     networks:
       - dev
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
   
 volumes:
-  postgres_data:
+  postgres-data:
   
